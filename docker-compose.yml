@@ -1,15 +1,28 @@
-# Use root/example as user/password credentials
 version: '3.1'
 services:
-  db:
+  # Backend
+  my-backend:
+    build: ./build-backend
+    ports:
+      - 8080:8080
+    restart: always
+    # wait test-database-mysql && adminer start
+    # then my-backend is start
+    depends_on:
+      - test-database-mysql
+      - adminer
+  # Database
+  test-database-mysql:
     image: mysql
     command: --default-authentication-plugin=mysql_native_password
     restart: always
+    volumes:
+      - ./data_mysql:/var/lib/mysql
     environment:
       MYSQL_ROOT_PASSWORD: odkhang123
-
+  # Mysql GUI
   adminer:
     image: adminer
     restart: always
     ports:
-      - 8080:8080
+      - 8090:8080
