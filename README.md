@@ -18,3 +18,5 @@ Open GUI MYSQL: http://localhost:8090
 
 Stop the Application
 <pre>docker compose down</pre>
+
+<h1>Good luck!</h1>
